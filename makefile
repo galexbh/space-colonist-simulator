@@ -3,6 +3,3 @@ start:
 
 test:
 	python3 src/sim.py
-
-sim:
-	python3 src/sim.py
