@@ -45,13 +45,10 @@ class RightFrame(tk.Frame):
 
     def transition_to_simulator(self):
         self.master.destroy()  # Cierra la ventana principal
-        ColonosSimulator().mainloop()  # Abre la nueva ventana
-
+        ColonosSimulator().mainloop()  # Abre la nueva ventana 
 
     def transition_to_help(self):
-        self.master.destroy()
-        ConoceMasWindow().mainloop()
-
+        ConoceMasWindow(self.master)
 
 class App(tk.Tk):
     def __init__(self, title, size) -> None:

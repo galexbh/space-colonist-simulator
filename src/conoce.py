@@ -1,9 +1,9 @@
 import tkinter as tk
 from tkinter import font
 
-class ConoceMasWindow(tk.Tk):
-    def __init__(self):
-        super().__init__()
+class ConoceMasWindow(tk.Toplevel):
+    def __init__(self, master=None):
+        super().__init__(master)
         
         self.initialize_window()
         self.create_ui()
@@ -19,11 +19,11 @@ class ConoceMasWindow(tk.Tk):
     def create_ui(self):
         self.create_nav_bar()
         self.create_content()
-        self.create_paragraph()
+        #self.create_paragraph()
         self.create_image_and_button()
 
     def create_nav_bar(self):
-        nav_bar = tk.Frame(self.root, bg=self.blue_color)
+        nav_bar = tk.Frame(self, bg=self.blue_color) # Cambio de self.root a self
         nav_bar.pack(side="top", fill="x")
 
         title_label = tk.Label(nav_bar, text="Conoce Más", 
@@ -31,7 +31,7 @@ class ConoceMasWindow(tk.Tk):
         title_label.pack(pady=5, padx=10, anchor="w")
 
     def create_content(self):
-        content_frame = tk.Frame(self.root, bg=self.white_color)
+        content_frame = tk.Frame(self, bg=self.white_color)  # Cambio de self.root a self
         content_frame.pack(fill="both", expand=True, padx=20, pady=20)
 
         left_column = tk.Frame(content_frame, bg=self.white_color)
@@ -59,14 +59,11 @@ class ConoceMasWindow(tk.Tk):
         text_label.pack(side="left", padx=10)
 
     def create_image_and_button(self):
-        regresar_button = tk.Button(self.root, text="Regresar", font=self.custom_font, bg=self.blue_color, fg="white", borderwidth=0, command=self.return_main, cursor="hand2", activebackground="#5762D5")
+        regresar_button = tk.Button(self, text="Regresar", font=self.custom_font, bg=self.blue_color, fg="white", borderwidth=0, command=self.return_main, cursor="hand2", activebackground="#5762D5")
         regresar_button.pack(side="bottom", anchor="center", pady=(0, 20))
 
     def return_main(self):
         self.destroy()
-        from main import App # importación tardia, solo hace la importación hasta que se necesite.
-        app = App("Simulador Colonos", (1000, 600))
-        app.mainloop()
 
         
 
