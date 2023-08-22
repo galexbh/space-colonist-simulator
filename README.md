@@ -4,12 +4,18 @@ Currently, management games and simulators have proven to be a valuable tool for
 
 ## space virtual environment
 ```bash
-python3 -m venv development
+py -m venv development
 ```
 ## activate virtual environment
+- linux
 ```bash
-source development/bin/activate
+source development/bin/activate 
 ```
+- windows
+```powershell
+development\Scripts\activate
+```
+
 ## install dependencies
 ```bash
 pip install -r requirements.txt
