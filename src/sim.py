@@ -12,7 +12,7 @@ class Simulador:
         num_anios (int): [Número de años a simular]
     """
 
-    def __init__(self, poblacion_inicial, recursos_iniciales, num_anios=365):
+    def __init__(self, poblacion_inicial, recursos_iniciales, num_anios):
         # Parámetros iniciales
         self.poblacion_inicial = poblacion_inicial
         self.recursos_iniciales = recursos_iniciales
@@ -37,13 +37,15 @@ class Simulador:
         # Valores actuales
         self.poblacion_actual = self.poblacion_inicial
         self.recursos_disponibles = self.recursos_iniciales
+        print(self.poblacion_actual)
+        print(self.recursos_disponibles)
+        print(self.num_anios)
 
     def expedicion_de_recursos(self, poblacion_actual, recursos_disponibles, recursos_encontrados, probabilidad_exito):
         if poblacion_actual == 0:
             return poblacion_actual, recursos_disponibles
 
         exito = random.random() <= probabilidad_exito
-        print(exito)
 
         if exito:
             recursos_disponibles += recursos_encontrados
@@ -113,6 +115,18 @@ class Simulador:
         return self.muertes[-1]
 
     def simular(self, tasa_natalidad, tasa_mortalidad, consumo_recursos_por_persona, recursos_por_expedicion, probabilidad_exito_expedicion, proporcion_individuos_infectados, beta, gamma, tasa_mortalidad_enfermedad):
+
+        print(tasa_natalidad)
+        print(tasa_mortalidad)
+        print(consumo_recursos_por_persona)
+        print(recursos_por_expedicion)
+        print(probabilidad_exito_expedicion)
+        print(proporcion_individuos_infectados)
+        print(beta)
+        print(gamma)
+        print(tasa_mortalidad_enfermedad)
+        
+        
         for anio in range(self.num_anios):
             # Asegurarse de que la población no sea negativa
             self.poblacion_actual = max(0, round(self.poblacion_actual))
@@ -174,6 +188,31 @@ class Simulador:
 
 
 # Inicialización
-sim = Simulador(10000, 20000000)
-sim.simular(0.3, 0.1, 2, 10000, 0, 0.2, 0.04, 0.03, 0.02)
-sim.mostrar_resultados()
+def ejecutar_simulacion(valores_simulacion):
+    poblacion_inicial = valores_simulacion['poblacion_inicial']
+    recursos_iniciales = valores_simulacion['recursos_iniciales']
+    num_anios = valores_simulacion['num_anios']
+    tasa_natalidad= valores_simulacion['tasa_natalidad']
+    tasa_mortalidad= valores_simulacion['tasa_mortalidad']
+    consumo_recursos_por_persona= valores_simulacion['consumo_recursos_por_persona']
+    recursos_por_expedicion= valores_simulacion['recursos_por_expedicion']
+    probabilidad_exito_expedicion= valores_simulacion['probabilidad_exito_expedicion']
+    proporcion_individuos_infectados= valores_simulacion['proporcion_individuos_infectados']
+    beta= valores_simulacion['beta']
+    gamma= valores_simulacion['gamma']
+    tasa_mortalidad_enfermedad= valores_simulacion['tasa_mortalidad_enfermedad']
+
+    print(tasa_natalidad)
+    print(tasa_mortalidad)
+    print(consumo_recursos_por_persona)
+    print(recursos_por_expedicion)
+    print(probabilidad_exito_expedicion)
+    print(proporcion_individuos_infectados)
+    print(beta)
+    print(gamma)
+    print(tasa_mortalidad_enfermedad)
+
+    sim = Simulador(poblacion_inicial, recursos_iniciales, num_anios)
+    sim.simular(tasa_natalidad, tasa_mortalidad, consumo_recursos_por_persona, recursos_por_expedicion, probabilidad_exito_expedicion, proporcion_individuos_infectados, beta, gamma, tasa_mortalidad_enfermedad)
+    sim.mostrar_resultados()
+

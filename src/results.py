@@ -67,21 +67,27 @@ class SimuladorVentana(tk.Tk):
             text="Reiniciar simulación", 
             bg=RED_COLOR
         )
+        
+        reiniciar_button.config(command=self.reiniciar_simulacion)
         reiniciar_button.pack(side="left", padx=10, pady=10)
 
-        ver_datos_button = self._create_custom_button(
-            button_frame, 
-            text="Ver datos", 
-            bg=ORANGE_BUTTON_COLOR,
-            cursor="hand2"
-        )
-        ver_datos_button.pack(side="right", padx=10, pady=10)
-
-    def _create_custom_button(self, parent, text, bg):
+    def _create_custom_button(self, parent, text, bg, cursor=None):
         return tk.Button(
             parent, 
             text=text, 
             font=self.CUSTOM_FONT, 
             bg=bg, 
-            fg=WHITE_COLOR
+            fg=WHITE_COLOR,
+            cursor=cursor
         )
+    
+    def reiniciar_simulacion(self):
+        self.destroy()
+        if self.master:
+            self.master.on_closing_simulador()
+        self.abrir_colonos_simulator()
+    
+    def abrir_colonos_simulator(self):
+        from inputs import ColonosSimulator
+        colonos_simulator = ColonosSimulator()
+        colonos_simulator.mainloop()
